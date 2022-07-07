@@ -8,7 +8,7 @@ const Three = () => {
         if (OrbitControlsEl.current) {
             const { x, y } = state.mouse;
             OrbitControlsEl.current.setAzimuthalAngle(-x * angleToRadians(45));
-            OrbitControlsEl.current.setPolarAngle((y+0.5) * angleToRadians(90 - 30));
+            OrbitControlsEl.current.setPolarAngle((y+0.75) * angleToRadians(90 - 30));
             OrbitControlsEl.current.update();
         }
     })
