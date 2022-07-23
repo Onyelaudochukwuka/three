@@ -8,7 +8,7 @@ const Three = () => {
         if (OrbitControlsEl.current) {
             const { x, y } = state.mouse;
             OrbitControlsEl.current.setAzimuthalAngle(-x * angleToRadians(45));
-            OrbitControlsEl.current.setPolarAngle((y+0.75) * angleToRadians(90 - 30));
+            OrbitControlsEl.current.setPolarAngle((y+1) * angleToRadians(90 - 30));
             OrbitControlsEl.current.update();
         }
     })
@@ -20,15 +20,23 @@ const Three = () => {
       <>
           <PerspectiveCamera makeDefault position={[0, 1, 5]} />
           <OrbitControls ref={OrbitControlsEl} minPolarAngle={angleToRadians(40)} maxPolarAngle={angleToRadians(80)} />
+          
+          {/* Ball */}
           <mesh position={[0,0.5,0]}>
               <sphereGeometry args={[0.5, 32, 32]} />
-              <meshStandardMaterial color="#222"/>
+              <meshStandardMaterial color="#fff"/>
           </mesh>
+
+          {/* Floor */}
           <mesh rotation={[-(angleToRadians(90)), 0, 0]} >
               <planeGeometry args={[7, 7]} />
-              <meshStandardMaterial color="#eee"/>
-      </mesh>
-          <ambientLight args={["#ffffff", 1]} />
+              <meshPhongMaterial color="#1ea3d8"/>
+          </mesh>
+
+          {/* Ambient Light */}
+          <ambientLight args={["#ffffff", 0.25]} />
+          {/* Directional Light */}
+          <spotLight args={["#ffffff", 1,2]} position={[-3, 1, 0]} />
       </>
   )
 }
