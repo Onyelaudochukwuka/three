@@ -3,34 +3,46 @@ import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { angleToRadians } from "../../utils/angle";
 import * as THREE from "three";
+import gsap from "gsap";
 const Three = () => {
+
     const OrbitControlsEl = useRef();
     useFrame((state) => {
         if (OrbitControlsEl.current) {
             const { x, y } = state.mouse;
-            OrbitControlsEl.current.setAzimuthalAngle(-x * angleToRadians(45));
-            OrbitControlsEl.current.setPolarAngle((y+1) * angleToRadians(90 - 30));
+            OrbitControlsEl.current.setAzimuthalAngle(-x * angleToRadians(180));
+            OrbitControlsEl.current.setPolarAngle((y + 1) * angleToRadians(90 - 60));
             OrbitControlsEl.current.update();
         }
     })
-    
+
+    // Animation
+
+    const ballRef = useRef();
     useEffect(() => {
-        console.log()
-    },[OrbitControlsEl.current])
+        if (ballRef.current) {
+            // x-axis motion
+            gsap.to(ballRef.current.position, {
+                x: 2,
+                duration: 2,
+                ease: "power1"
+            })
+        } 
+    },[ballRef.current])
   return (
       <>
           <PerspectiveCamera makeDefault position={[0, 1, 5]} />
-          <OrbitControls ref={OrbitControlsEl} minPolarAngle={angleToRadians(40)} maxPolarAngle={angleToRadians(80)} />
+          <OrbitControls ref={OrbitControlsEl} minPolarAngle={angleToRadians(60)} maxPolarAngle={angleToRadians(80)} />
           
           {/* Ball */}
-          <mesh position={[0,0.5,0]} castShadow>
+          <mesh position={[-2,0.5,0]} castShadow ref={ballRef}>
               <sphereGeometry args={[0.5, 32, 32]} />
-              <meshStandardMaterial color="#fff"/>
+              <meshStandardMaterial color="#fff" metalness={0.75} roughness={0.3} />
           </mesh>
 
           {/* Floor */}
           <mesh rotation={[-(angleToRadians(90)), 0, 0]} receiveShadow>
-              <planeGeometry args={[7, 7]} />
+              <planeGeometry args={[90, 90]} />
               <meshStandardMaterial color="#1ea3d8"/>
           </mesh>
 
