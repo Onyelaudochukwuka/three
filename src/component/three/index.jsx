@@ -1,7 +1,8 @@
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { Environment, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { angleToRadians } from "../../utils/angle";
+import * as THREE from "three";
 const Three = () => {
     const OrbitControlsEl = useRef();
     useFrame((state) => {
@@ -30,14 +31,22 @@ const Three = () => {
           {/* Floor */}
           <mesh rotation={[-(angleToRadians(90)), 0, 0]} receiveShadow>
               <planeGeometry args={[7, 7]} />
-              <meshPhongMaterial color="#1ea3d8"/>
+              <meshStandardMaterial color="#1ea3d8"/>
           </mesh>
 
           {/* Ambient Light */}
           <ambientLight args={["#ffffff", 0.25]} />
 
           {/* SpotLight */}
-          <spotLight args={["#ffffff", 1.5,7,angleToRadians(45),0.4]} position={[-3, 1, 0]} castShadow/>
+          <spotLight args={["#ffffff", 1.5, 7, angleToRadians(45), 0.4]} position={[-3, 1, 0]} castShadow />
+          
+          {/* Environment */}
+          <Environment background>
+              <mesh>
+              <sphereGeometry args={[50, 100, 100]} />
+                  <meshBasicMaterial side={THREE.BackSide} color="#2280cc" />
+              </mesh>
+          </Environment>
       </>
   )
 }
