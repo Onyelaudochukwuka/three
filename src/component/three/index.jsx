@@ -23,9 +23,9 @@ const Three = () => {
         if (ballRef.current) {
             // x-axis motion
             gsap.to(ballRef.current.position, {
-                x: 2,
+                x: 1,
                 duration: 2,
-                ease: "power1"
+                ease: "power2.out"
             })
         } 
     },[ballRef.current])
