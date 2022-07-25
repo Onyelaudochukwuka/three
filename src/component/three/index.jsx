@@ -10,8 +10,8 @@ const Three = () => {
     useFrame((state) => {
         if (OrbitControlsEl.current) {
             const { x, y } = state.mouse;
-            OrbitControlsEl.current.setAzimuthalAngle(-x * angleToRadians(180));
-            OrbitControlsEl.current.setPolarAngle((y + 1) * angleToRadians(90 - 60));
+            OrbitControlsEl.current.setAzimuthalAngle(-x * angleToRadians(45));
+            OrbitControlsEl.current.setPolarAngle((y + 1) * angleToRadians(90 - 30));
             OrbitControlsEl.current.update();
         }
     })
@@ -21,12 +21,25 @@ const Three = () => {
     const ballRef = useRef();
     useEffect(() => {
         if (ballRef.current) {
+
+            //timeline
+            const timeline = gsap.timeline();
             // x-axis motion
-            gsap.to(ballRef.current.position, {
+            timeline.to(ballRef.current.position, {
                 x: 1,
                 duration: 2,
-                ease: "power2.out"
-            })
+                ease: "power2.in"
+            });
+
+            // y-axis motion
+            timeline.to(ballRef.current.position, {
+                y: 0.5,
+                duration: 0.5,
+                ease: "bounce.out"
+            }, "<"),
+                
+                // Play
+                timeline.play()
         } 
     },[ballRef.current])
   return (
@@ -35,14 +48,14 @@ const Three = () => {
           <OrbitControls ref={OrbitControlsEl} minPolarAngle={angleToRadians(60)} maxPolarAngle={angleToRadians(80)} />
           
           {/* Ball */}
-          <mesh position={[-2,0.5,0]} castShadow ref={ballRef}>
+          <mesh position={[-2,2.5,0]} castShadow ref={ballRef}>
               <sphereGeometry args={[0.5, 32, 32]} />
-              <meshStandardMaterial color="#fff" metalness={0.75} roughness={0.3} />
+              <meshStandardMaterial color="#ffffff" metalness={0.75} roughness={0.3} />
           </mesh>
 
           {/* Floor */}
           <mesh rotation={[-(angleToRadians(90)), 0, 0]} receiveShadow>
-              <planeGeometry args={[90, 90]} />
+              <planeGeometry args={[20, 20]} />
               <meshStandardMaterial color="#1ea3d8"/>
           </mesh>
 
