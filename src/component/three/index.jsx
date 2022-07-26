@@ -38,8 +38,7 @@ const Three = () => {
                 ease: "bounce.out"
             }, "<"),
                 
-                // Play
-                timeline.play()
+              
         } 
     },[ballRef.current])
   return (
