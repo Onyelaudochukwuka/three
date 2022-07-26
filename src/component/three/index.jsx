@@ -34,12 +34,14 @@ const Three = () => {
             // y-axis motion
             timeline.to(ballRef.current.position, {
                 y: 0.5,
-                duration: 0.5,
+                duration: 1,
                 ease: "bounce.out"
             }, "<"),
                 
-                // Play
-                timeline.play()
+            
+            
+            // Play
+            timeline.play()
         } 
     },[ballRef.current])
   return (
@@ -60,7 +62,7 @@ const Three = () => {
           </mesh>
 
           {/* Ambient Light */}
-          <ambientLight args={["#ffffff", 0.25]} />
+          <ambientLight args={["#ffffff", 0.35]} />
 
           {/* SpotLight */}
           <spotLight args={["#ffffff", 1.5, 7, angleToRadians(45), 0.4]} position={[-3, 1, 0]} castShadow />
