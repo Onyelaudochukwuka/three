@@ -1,11 +1,10 @@
-import { Environment, OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { Environment, OrbitControls, PerspectiveCamera, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { angleToRadians } from "../../utils/angle";
 import * as THREE from "three";
 import gsap from "gsap";
 const Three = () => {
-
     const OrbitControlsEl = useRef();
     useFrame((state) => {
         if (OrbitControlsEl.current) {
