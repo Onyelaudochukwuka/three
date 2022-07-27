@@ -1,3 +1,4 @@
 #three-canvas-container{
   height: 100vh !important;
+  box-sizing: content-box;
 }
