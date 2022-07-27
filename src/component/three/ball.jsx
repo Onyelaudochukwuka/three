@@ -22,6 +22,12 @@ const Ball = (props) => {
                 ease: "bounce.out"
             }, "<"),
 
+                timeline.to(ballRef.current.position, {
+                    x: Math.random() * 5,
+                    duration: 1,
+                    ease: "bounce.out"
+                }, "<"),
+            
 
 
                 // Play
@@ -29,7 +35,7 @@ const Ball = (props) => {
         }
     }, [ballRef.current])
   return (
-      <mesh position={[0, 2.5, 60]} {...props} scale={4} castShadow ref={ballRef}>
+      <mesh position={[0, 2.5, 60]} {...props} scale={4 * Math.pow(1.009, props.pow)} castShadow ref={ballRef}>
           <sphereGeometry args={[0.5, 32, 32]} />
           <meshStandardMaterial color="#ffffff" metalness={0.75} roughness={0.3} />
       </mesh>
