@@ -16,7 +16,7 @@ const Ball = ({pow,position}) => {
 
             // y-axis motion
             timeline.to(ballRef.current.position, {
-                y: 1.9,
+                y: 1.57,
                 duration: 1,
                 ease: "bounce.out"
             }, "<"),
