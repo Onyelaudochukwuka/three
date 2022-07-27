@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { angleToRadians } from "../../utils/angle";
 import * as THREE from "three";
 import gsap from "gsap";
+import car from './car';
 const Three = () => {
     const OrbitControlsEl = useRef();
     useFrame((state) => {
