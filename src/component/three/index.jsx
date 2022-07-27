@@ -8,11 +8,7 @@ import Ball from "./ball";
 const Three = () => {
     const [position, setPosition] = useState([3, 0.65, 0]);
     const [array, setArray] = useState([1])
-    setInterval(() => {
-        setArray((prev) => {
-            return [...array, 1]
-        })
-    }, 10000);
+
     const OrbitControlsEl = useRef();
     useFrame((state) => {
             const { x, y } = state.mouse;
@@ -23,7 +19,12 @@ useEffect(() => {
 
 
 }, [position])
-
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setArray((prev)=>[...prev,1])
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
     // Animation
 
   return (
@@ -32,9 +33,11 @@ useEffect(() => {
           <OrbitControls ref={OrbitControlsEl} minPolarAngle={angleToRadians(60)} maxPolarAngle={angleToRadians(90)} />
           
           {/* Ball */}
+          <group>
           {array.map((a,i) =>
-              <Ball key={i}/>
-          )}
+              <Ball key={i} pow={i} />
+              )}
+          </group>
           {/* Car */}
           {/* <Car position={position} castShadow/> */}
           {/* Floor */}
