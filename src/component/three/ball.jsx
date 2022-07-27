@@ -1,17 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from "gsap";
-const Ball = (props) => {
-
+const Ball = ({pow,position}) => {
     const ballRef = useRef();
+    const [x, setX] = useState((Math.floor(Math.random()) % 2 == 0 ? -Math.random() * 5 : Math.random() * 5))
     useEffect(() => {
         if (ballRef.current) {
-
             //timeline
             const timeline = gsap.timeline();
             // x-axis motion
             timeline.to(ballRef.current.position, {
                 z: -60,
-                duration: 7.5 * Math.pow(0.99,props.pow),
+                duration: 7.5 * Math.pow(0.99,pow),
                 ease: "power2.out"
             });
 
@@ -23,7 +22,7 @@ const Ball = (props) => {
             }, "<"),
 
                 timeline.to(ballRef.current.position, {
-                    x: Math.random() * 5,
+                    x: x,
                     duration: 1,
                     ease: "bounce.out"
                 }, "<"),
@@ -33,9 +32,9 @@ const Ball = (props) => {
                 // Play
                 timeline.play()
         }
-    }, [ballRef.current])
+    }, [ballRef.current,position])
   return (
-      <mesh position={[0, 2.5, 60]} {...props} scale={4 * Math.pow(1.009, props.pow)} castShadow ref={ballRef}>
+      <mesh position={[0, 2.5, 60]} scale={4} castShadow ref={ballRef}>
           <sphereGeometry args={[0.5, 32, 32]} />
           <meshStandardMaterial color="#ffffff" metalness={0.75} roughness={0.3} />
       </mesh>
