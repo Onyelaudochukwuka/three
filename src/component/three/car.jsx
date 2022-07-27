@@ -6,30 +6,14 @@ source: https://sketchfab.com/3d-models/free-porsche-911-carrera-4s-d01b25448379
 title: (FREE) Porsche 911 Carrera 4S
 */
 
-import React, { useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import gsap from "gsap";
 
 export default function Model({ ...props }) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/model-transformed.glb')
-  useEffect(() => {
-    if (group.current) {
-      console.log(group);
-      //timeline
-      const timeline = gsap.timeline();
-      // x-axis motion
-      timeline.to(group.current.position, {
-        z: 5,
-        duration: 20,
-        ease: "power2.in"
-      });
 
-
-        // Play
-        timeline.play()
-    }
-  }, [group.current])
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[-0.02, -0.01, 0.06]} rotation={[-Math.PI / 2, 0, 0]} scale={0.58}>
