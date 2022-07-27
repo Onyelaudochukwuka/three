@@ -1,20 +1,25 @@
 import { Environment, OrbitControls, PerspectiveCamera, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { angleToRadians } from "../../utils/angle";
 import * as THREE from "three";
 import gsap from "gsap";
 import Car from './car';
 const Three = () => {
+    const [position, setPosition] = useState([3, 0.65, 0])
     const OrbitControlsEl = useRef();
     useFrame((state) => {
         if (OrbitControlsEl.current) {
             const { x, y } = state.mouse;
-            OrbitControlsEl.current.setAzimuthalAngle(-x * angleToRadians(360));
-            OrbitControlsEl.current.setPolarAngle((y + 1) * angleToRadians(360));
-            OrbitControlsEl.current.update();
+            setPosition([-x * 10, 0.65, y * 10]);
+            console.log(position)
         }
     })
+useEffect(() => {
+  
+
+
+}, [position])
 
     // Animation
 
@@ -56,7 +61,7 @@ const Three = () => {
           </mesh>
 
           {/* Car */}
-          <Car position={[3, 0.65, 0]} castShadow/>
+          <Car position={position} castShadow/>
           {/* Floor */}
           <mesh rotation={[-(angleToRadians(90)), 0, 0]} receiveShadow>
               <planeGeometry args={[20, 20]} />
