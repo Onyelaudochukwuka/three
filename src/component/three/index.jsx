@@ -4,14 +4,14 @@ import { useEffect, useRef } from "react";
 import { angleToRadians } from "../../utils/angle";
 import * as THREE from "three";
 import gsap from "gsap";
-import car from './car';
+import Car from './car';
 const Three = () => {
     const OrbitControlsEl = useRef();
     useFrame((state) => {
         if (OrbitControlsEl.current) {
             const { x, y } = state.mouse;
-            OrbitControlsEl.current.setAzimuthalAngle(-x * angleToRadians(45));
-            OrbitControlsEl.current.setPolarAngle((y + 1) * angleToRadians(90 - 30));
+            OrbitControlsEl.current.setAzimuthalAngle(-x * angleToRadians(360));
+            OrbitControlsEl.current.setPolarAngle((y + 1) * angleToRadians(360));
             OrbitControlsEl.current.update();
         }
     })
@@ -55,6 +55,8 @@ const Three = () => {
               <meshStandardMaterial color="#ffffff" metalness={0.75} roughness={0.3} />
           </mesh>
 
+          {/* Car */}
+          <Car position={[3, 0.65, 0]} castShadow/>
           {/* Floor */}
           <mesh rotation={[-(angleToRadians(90)), 0, 0]} receiveShadow>
               <planeGeometry args={[20, 20]} />
@@ -65,7 +67,7 @@ const Three = () => {
           <ambientLight args={["#ffffff", 0.35]} />
 
           {/* SpotLight */}
-          <spotLight args={["#ffffff", 1.5, 7, angleToRadians(45), 0.4]} position={[-3, 1, 0]} castShadow />
+          <spotLight args={["#ffffff", 1.5, 15, angleToRadians(45), 0.4]} position={[-3, 1, 0]} castShadow />
           
           {/* Environment */}
           <Environment background>
