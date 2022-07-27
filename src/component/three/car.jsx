@@ -8,13 +8,14 @@ title: (FREE) Porsche 911 Carrera 4S
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import gsap from "gsap";
 
 export default function Model({ ...props }) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/model-transformed.glb')
   useEffect(() => {
-    if (ballRef.current) {
-
+    if (group.current) {
+      console.log(group);
       //timeline
       const timeline = gsap.timeline();
       // x-axis motion
