@@ -12,6 +12,31 @@ import { useGLTF } from '@react-three/drei'
 export default function Model({ ...props }) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/model-transformed.glb')
+  useEffect(() => {
+    if (ballRef.current) {
+
+      //timeline
+      const timeline = gsap.timeline();
+      // x-axis motion
+      timeline.to(group.current.position, {
+        x: 1,
+        duration: 2,
+        ease: "power2.in"
+      });
+
+      // y-axis motion
+      timeline.to(group.current.position, {
+        y: 0.5,
+        duration: 1,
+        ease: "bounce.out"
+      }, "<"),
+
+
+
+        // Play
+        timeline.play()
+    }
+  }, [group.current])
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[-0.02, -0.01, 0.06]} rotation={[-Math.PI / 2, 0, 0]} scale={0.58}>
