@@ -26,11 +26,12 @@ const Three = () => {
 
   return (
       <>
+          <Html style={{top:0,position:'absolute', display: 'flex', flex: 1, justifyContent: 'center', minHeight: '10vh', minWidth: '60vw' }}>
+              <div style={{ fontSize: 50, fontWeight: 600, zIndex: -1,userSelect: 'none' }}>{score}</div>
+          </Html>
           <PerspectiveCamera makeDefault position={[0, 15, -15]} />
           <OrbitControls ref={OrbitControlsEl} minPolarAngle={angleToRadians(60)} maxPolarAngle={angleToRadians(90)} />
-          <Html>
-              <div style={{ fontSize: 50, fontWeight: 600, zIndex: -1, position: 'absolute', top: '50%', left:'50%' }}>{score}</div>
-          </Html>
+
 
           {/* Ball */}
           <group>
