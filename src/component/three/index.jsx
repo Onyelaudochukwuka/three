@@ -29,7 +29,7 @@ useEffect(() => {
 
   return (
       <>
-          <PerspectiveCamera makeDefault position={[0, 10, -10]} />
+          <PerspectiveCamera makeDefault position={[0, 15, -15]} />
           <OrbitControls ref={OrbitControlsEl} minPolarAngle={angleToRadians(60)} maxPolarAngle={angleToRadians(90)} />
           
           {/* Ball */}
@@ -39,7 +39,7 @@ useEffect(() => {
               )}
           </group>
           {/* Car */}
-          {/* <Car position={position} castShadow/> */}
+          <Car position={position} castShadow/>
           {/* Floor */}
           <mesh rotation={[-(angleToRadians(90)), 0, 0]} scale={100} receiveShadow>
               <planeGeometry args={[20, 20]} />
